@@ -46,7 +46,7 @@ export function getGeneralRanking(players: PlayerProfileWithStats[]) {
   return playersGeneralRanking.map((player, index) => {
     return {
       ...player,
-      position: `${index + 1}°`,
+      position: `${index + 1}`,
     };
   });
 }

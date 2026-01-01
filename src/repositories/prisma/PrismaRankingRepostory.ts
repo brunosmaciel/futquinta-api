@@ -14,9 +14,8 @@ export class PrismaRankingRepository implements IRankingsRepository {
   async getRecordRanking(): Promise<RecordRanking[]> {
     try {
       const allPlayers = await PlayersProfile.findMany({
-        where:{
-          role:"PERMANENT",
-          
+        where: {
+          role: 'PERMANENT',
         },
 
         include: {
@@ -69,7 +68,7 @@ export class PrismaRankingRepository implements IRankingsRepository {
       const [allGoalkeepers, totalGames] = await Promise.all([
         PlayersProfile.findMany({
           where: {
-            function: 'GOALKEEPER',
+            playerPosition: 'GOALKEEPER',
           },
           include: {
             Stats: {
@@ -99,7 +98,7 @@ export class PrismaRankingRepository implements IRankingsRepository {
         };
       });
 
-      return goalkeepersRanking.filter((gk)=>gk.name !== 'Rafael');
+      return goalkeepersRanking.filter((gk) => gk.name !== 'Rafael');
     } catch (err: any) {
       console.log(err);
     }

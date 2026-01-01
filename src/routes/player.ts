@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import { PlayersProfile, oldSeason } from '../services/prismaClient';
 import { createPlayerProfileController } from '../useCases/create-player-profile';
 import { listAllPlayersProfileController } from '../useCases/list-all-players-profile';
 import { listOnePlayerProfileController } from '../useCases/list-one-player-profile';
@@ -63,6 +64,21 @@ router.delete(
 //upload test
 router.post('/upload/:id', parser.single('avatar'), (req, res) => {
   return uploadAvatarController.handle(req, res);
+});
+
+// carregador temporadas passadas
+router.get('/oldseason/:id', async (req, res) => {
+  const { id } = req.params;
+  const players = await PlayersProfile.findUnique({
+    where: {
+      id: +id,
+    },
+    include: {
+      oldSeason: true,
+    },
+  });
+
+  res.json(players);
 });
 
 export default router;

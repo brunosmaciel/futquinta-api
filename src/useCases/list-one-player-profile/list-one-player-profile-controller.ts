@@ -13,6 +13,7 @@ export class ListOnePlayerProfileController {
           },
           include: {
             games: true,
+            oldSeason: true,
             Stats: {
               include: {
                 Game: true,
@@ -29,6 +30,7 @@ export class ListOnePlayerProfileController {
 
       res.status(200).json(listOneUser);
     } catch (err: any) {
+      console.log(err);
       res.status(400).json({ message: err.message });
     }
   }

@@ -12,6 +12,7 @@ export class CreatePlayerProfile {
     draws,
     goals,
     shirtNumber,
+    playerPosition,
     slug,
     role,
   }: ICreatePlayerProfileDTO) {
@@ -23,6 +24,7 @@ export class CreatePlayerProfile {
       draws,
       goals,
       shirtNumber,
+      playerPosition,
       slug,
       role,
     });
