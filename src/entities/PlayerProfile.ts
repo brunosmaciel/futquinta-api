@@ -1,4 +1,4 @@
-import { PlayerProfileRole } from '@prisma/client';
+import { PlayerProfileRole, PlayerFunction } from '@prisma/client';
 export class PlayerProfile {
   id?: number | string;
   name: string;
@@ -7,6 +7,7 @@ export class PlayerProfile {
   currentPicture?: string | null;
   shirtNumber: number | null;
   slug: string;
+  playerPosition: PlayerFunction;
   goals: number;
   assists: number;
   victories: number;
@@ -20,6 +21,7 @@ export class PlayerProfile {
     this.id = props.id;
     this.name = props.name;
     this.goals = props.goals;
+    this.playerPosition = props.playerPosition;
     this.assists = props.assists;
     this.victories = props.victories;
     this.defeats = props.defeats;

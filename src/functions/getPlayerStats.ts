@@ -12,7 +12,7 @@ export const getGamesRecord = (
   return +record;
 };
 export function getPlayerStats(player: PlayerProfileWithStats) {
-  const { function: playerFunction, Stats } = player;
+  const { playerPosition, Stats } = player;
   const goals = Stats.map((stat) => stat.goals).reduce(
     (acc, current) => acc + current,
     0
@@ -63,7 +63,7 @@ export function getPlayerStats(player: PlayerProfileWithStats) {
 
   const goalsConceded = goalsConcededOnGreenTeam + goalsConcededOnWhiteTeam;
 
-  if (playerFunction === 'GOALKEEPER') {
+  if (playerPosition === 'GOALKEEPER') {
     return {
       goals,
       goalsConceded,

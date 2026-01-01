@@ -25,6 +25,7 @@ export class PostgresPlayerProfileRepository implements IPlayerProfileRepository
     }
   }
   async listById(id: number): Promise<PlayerProfile> {
+    
     try {
       const listPlayerById = await PlayersProfile.findUniqueOrThrow({
         where: {
@@ -36,6 +37,11 @@ export class PostgresPlayerProfileRepository implements IPlayerProfileRepository
             include: {
               Game: true,
               player: true,
+            },
+          },
+          oldSeason: {
+            orderBy: {
+              year: 'asc',
             },
           },
 
@@ -91,6 +97,7 @@ export class PostgresPlayerProfileRepository implements IPlayerProfileRepository
     name,
     goals,
     assists,
+    playerPosition,
     victories,
     defeats,
     draws,
@@ -108,6 +115,7 @@ export class PostgresPlayerProfileRepository implements IPlayerProfileRepository
           defeats,
           draws,
           shirtNumber,
+          playerPosition,
           slug,
           role,
         },
@@ -123,6 +131,7 @@ export class PostgresPlayerProfileRepository implements IPlayerProfileRepository
           throw new Error(err.message);
         }
       }
+      console.log(err);
       throw new Error('Internal Server Error');
     }
   }

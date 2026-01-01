@@ -7,5 +7,6 @@ const PlayersProfile = prisma.playerProfile;
 const PlayersStats = prisma.playerStats;
 const User = prisma.user;
 const MOTMModel = prisma.mOTM;
+const oldSeason = prisma.oldSeason;
 
-export { GameModel, PlayersProfile, PlayersStats, prisma, User, MOTMModel };
+export { GameModel, oldSeason, PlayersProfile, PlayersStats, prisma, User, MOTMModel };

@@ -6,6 +6,7 @@ export interface ICreatePlayerProfileDTO {
   defeats: number;
   draws: number;
   slug: string;
+  playerPosition: 'OUTFIELDPLAYER' | 'GOALKEEPER';
   greenShirtpicture: string | null;
   whiteShirtpicture: string | null;
   shirtNumber: number | null;

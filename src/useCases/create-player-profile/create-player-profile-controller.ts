@@ -16,9 +16,11 @@ export class CreatePlayerProfileController {
       greenShirtpicture = null,
       whiteShirtpicture = null,
       currentPicture = null,
+      playerPosition,
       role = 'PERMANENT',
     } = req.body as ICreatePlayerProfileDTO;
     try {
+      console.log(req.body.playerPosition);
       const slug = slugify(name);
       const newPlayerProfile = await this.CreatePlayerProfileUseCase.execute({
         name,
@@ -31,6 +33,7 @@ export class CreatePlayerProfileController {
         greenShirtpicture,
         currentPicture,
         shirtNumber,
+        playerPosition,
         slug,
         role,
       });
