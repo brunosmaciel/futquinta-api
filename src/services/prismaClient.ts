@@ -8,5 +8,15 @@ const PlayersStats = prisma.playerStats;
 const User = prisma.user;
 const MOTMModel = prisma.mOTM;
 const oldSeason = prisma.oldSeason;
+const BolaMurchaClient = prisma.bolaMurcha;
 
-export { GameModel, oldSeason, PlayersProfile, PlayersStats, prisma, User, MOTMModel };
+export {
+  GameModel,
+  BolaMurchaClient,
+  oldSeason,
+  PlayersProfile,
+  PlayersStats,
+  prisma,
+  User,
+  MOTMModel,
+};
