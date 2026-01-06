@@ -141,6 +141,15 @@ export class PostgresGameRepository implements IGamesRepository {
               player: true,
             },
           },
+          BolaMurcha: {
+            include: {
+              player: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
           _count: true,
           players: {
             include: {

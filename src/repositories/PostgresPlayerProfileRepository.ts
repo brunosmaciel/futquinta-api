@@ -16,6 +16,7 @@ export class PostgresPlayerProfileRepository implements IPlayerProfileRepository
             },
           },
           MOTM: true,
+          BolaMurcha: true,
         },
       });
 
@@ -25,7 +26,6 @@ export class PostgresPlayerProfileRepository implements IPlayerProfileRepository
     }
   }
   async listById(id: number): Promise<PlayerProfile> {
-    
     try {
       const listPlayerById = await PlayersProfile.findUniqueOrThrow({
         where: {
@@ -47,6 +47,7 @@ export class PostgresPlayerProfileRepository implements IPlayerProfileRepository
 
           MOTM: true,
           _count: true,
+          BolaMurcha: true,
         },
       });
 

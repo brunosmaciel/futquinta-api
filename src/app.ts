@@ -7,6 +7,7 @@ import cors from 'cors';
 import userRoute from './routes/user';
 import MOTMRoute from './routes/motm.routes';
 import rankingsRoute from './routes/rankings.routes';
+import bolaMurchaRoute from './routes/bolaMurcha.routes';
 
 config();
 
@@ -34,6 +35,7 @@ class App {
     this.app.use('/v1/users', userRoute);
     this.app.use('/v1/motm', MOTMRoute);
     this.app.use('/v1/rankings', rankingsRoute);
+    this.app.use('/v1/bola-murcha', bolaMurchaRoute);
   }
 }
 export default new App().app;
