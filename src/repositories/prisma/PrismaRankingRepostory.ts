@@ -31,8 +31,8 @@ export class PrismaRankingRepository implements IRankingsRepository {
       const allPlayersConverted = allPlayers as unknown as PlayerProfileWithStats[];
       const totalNumberOfGames = await prisma.game.count();
 
-      const percentual = 0.4;
-      const fortyPerCentGames = totalNumberOfGames * percentual;
+      const percentual = 0.45;
+      const fortyPerCentGames = Math.ceil(totalNumberOfGames * percentual);
 
       const playerStats = allPlayersConverted
         .map((player) => {
@@ -50,12 +50,10 @@ export class PrismaRankingRepository implements IRankingsRepository {
           };
         })
         .filter((player) => player.games >= fortyPerCentGames)
-        .sort((a, b) => (a.record < b.record ? 1 : -1))
         .sort((a, b) => {
-          if (a.record === b.record && a.games > b.games) {
-            return -1;
-          }
-          return 1;
+          if (b.record !== a.record) return b.record - a.record;
+
+          return b.games - a.games;
         });
 
       return playerStats as unknown as RecordRanking[];
