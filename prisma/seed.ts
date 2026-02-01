@@ -1,54 +1,137 @@
 import { PrismaClient } from '@prisma/client';
-import { getPlayerStats } from '../src/functions/getPlayerStats';
-import { PlayerProfileWithStats } from '../index';
-import { getGeneralRanking } from './../src/functions/getGeneralRank';
+
 import pLimit from 'p-limit';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const limit = pLimit(3);
   return await prisma.$transaction(
     async (tx) => {
-      const players = await prisma.playerProfile.findMany({
-        select: {
-          id: true,
-          oldSeason: true,
-        },
+      await prisma.playerProfile.createMany({
+        data: [
+          {
+            name: 'Bruno-S',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 8,
+            playerPosition: 'OUTFIELDPLAYER',
+            slug: 'bruno-s',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'Carlos',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 10,
+            playerPosition: 'OUTFIELDPLAYER',
+            slug: 'carlos',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'Diego',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 7,
+            playerPosition: 'OUTFIELDPLAYER',
+            slug: 'diego',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'Felipe',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 11,
+            playerPosition: 'OUTFIELDPLAYER',
+            slug: 'felipe',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'Lucas',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 6,
+            playerPosition: 'OUTFIELDPLAYER',
+            slug: 'lucas',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'Matheus',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 5,
+            playerPosition: 'OUTFIELDPLAYER',
+            slug: 'matheus',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'Rafael',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 9,
+            playerPosition: 'OUTFIELDPLAYER',
+            slug: 'rafael',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'Thiago',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 4,
+            playerPosition: 'OUTFIELDPLAYER',
+            slug: 'thiago',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'Victor',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 1,
+            playerPosition: 'GOALKEEPER',
+            slug: 'victor',
+            role: 'PERMANENT',
+          },
+          {
+            name: 'André',
+            goals: 0,
+            assists: 0,
+            victories: 0,
+            defeats: 0,
+            draws: 0,
+            shirtNumber: 12,
+            playerPosition: 'GOALKEEPER',
+            slug: 'andre',
+            role: 'PERMANENT',
+          },
+        ],
+        skipDuplicates: true,
       });
-
-      await Promise.all(
-        players.map((player) =>
-          limit(async () => {
-            if (!player.oldSeason?.length) return;
-
-            const totals = player.oldSeason.reduce(
-              (acc, season) => {
-                acc.goals += season.goals;
-                acc.goalsConceded += season.goalsConceded ?? 0;
-                acc.victories += season.victories;
-                acc.defeats += season.defeats;
-                acc.draws += season.draws;
-                return acc;
-              },
-              {
-                goals: 0,
-                goalsConceded: 0,
-                victories: 0,
-                defeats: 0,
-                draws: 0,
-              }
-            );
-
-            return prisma.playerProfile.update({
-              where: { id: player.id },
-              data: totals,
-            });
-          })
-        )
-      );
-
-      return;
     },
     {
       timeout: 120000,

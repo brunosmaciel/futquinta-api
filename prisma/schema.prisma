@@ -5,9 +5,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator erd {
-  provider = "prisma-erd-generator"
-}
+
 
 datasource db {
   provider = "postgresql"
@@ -42,6 +40,13 @@ enum Result {
   DRAW
 }
 
+enum SuspensionStatus {
+  CLEAN
+  TWO_CARDS
+  SUSPENDED
+}
+
+
 enum PlayerProfileRole {
   PERMANENT
   GUEST
@@ -62,6 +67,9 @@ model PlayerProfile {
   greenShirtpicture String?
   whiteShirtpicture String?
   currentPicture    String?
+  suspensionStatus  SuspensionStatus @default(CLEAN)
+  totalYellowCards Int @default(0)
+  totalRedCards Int @default(0)
   shirtNumber       Int?
   goals             Int
   assists           Int
@@ -108,6 +116,8 @@ model PlayerStats {
   name          String
   goals         Int
   assists       Int
+  yellowCards Int @default(0)
+  redCards Int @default(0)
   substituition Int
   goalsConceded Int?
   function      PlayerFunction @default(OUTFIELDPLAYER)

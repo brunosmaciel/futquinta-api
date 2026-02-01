@@ -1,79 +1,11 @@
+colocar os cartoes que cada atleta recebeu em uma partida
 
-# Fut quinta
+ao finalizar a partida checar se:
 
-# Fut Quinta refactored
+- houve alguma expulsao, seja direta ou por 3 amarelos
 
+e tambem: adicionar no perfil do jogador a quantidade de cartoes amarelos e vermelhos recebidos na partida
 
-# Use cases
+Criar um campo suspensionStatus no perfil principal e ao final de cada partida checar se o numero total de cartoes vermelhos e divisivel por 3, se for o Atleta esta suspenso ate a finalizar a proxima partida
 
-- [x] Create a player profile X
-- [x] List all players profile X
-- [x] List player profile by id X
-- [x] Update player profile X
-- [x] Delete player profile X
-- [x] Create e game X
-- [x] Find all games with filters
-- [x] Find one game
-- [x] Update a game
-- [x] Delete a game
-- [x] Create a player stat
-- [x] update a player stat
-- [x] delete a player stat
-- [x] increment player stats to player profile
-- [x] increment player victories, wins, draws, defeats
-- [x] increment player man of the match score
-- [ ] set game team`s man of the match
-- [x] include position to player stats
-- [x] include position to player profile
-- [x] add goalkeeper goals conceeded
-- [x] abstratir a função do jogador do PlayerProfile na hora de criar o PlayerStat
-- [x] create MOTM
-- [x] list all MOTM
-- [ ] atualizar melhor da partida
-- [x] excluir um jogador da partida
-- [ ] adicionar outro jogador em uma partida ja iniciada
-- [ ] adicionar outro jogador a uma partida ja finalizada 
-- [ ] slugyfar nome de perfil do usuario quando nome atualizar
-
-
-
-# Other tasks
-
-- [x] Remove all console log from useCases
-- [x] Treat all prisma client errors with codes
-- [] Unable the user to add the same player stat on a game
-- [] Refact the icrement MOTM score
-
-
-
-
-
-# Prisma error type guard
-if (err instanceof Prisma.PrismaClientKnownRequestError) {
-      }
-      throw err;
-
-
-## Unit tests
-
-- [x] Create a player profile 
-- [x] List all players profile 
-- [x] List player profile by id 
-- [ ] Update player profile 
-- [ ] Delete player profile 
-- [ ] Create e game 
-- [ ] Find all games with filters
-- [ ] Find one game
-- [ ] Update a game
-- [ ] Delete a game
-- [ ] Create a player stat
-- [ ] update a player stat
-- [ ] delete a player stat
-- [ ] increment player stats to player profile
-- [ ] increment player victories, wins, draws, defeats
-- [ ] increment player man of the match score
-- [ ] set game team`s man of the match
-- [ ] include position to player stats
-- [ ] include position to player profile
-- [ ] add goalkeeper goals conceeded
-- [ ] abstratir a função do jogador do PlayerProfile na hora de criar o PlayerStat
+ao finalizar a partida, todos os jogadores com 2 cartoes vermelhos devem receber o status de pendurado, ao final da cada partida se o jogador tiver o status PENDURADO e 3 cartoes vermelhos ele estara suspenso e deve-se mudar o status para suspenso. Se o atleta tiver 3 cartoes vermelhos mas o status estiver SUSPENSO, deve ser mudar o status para LIBERADO

@@ -31,7 +31,7 @@ export class PrismaRankingRepository implements IRankingsRepository {
       const allPlayersConverted = allPlayers as unknown as PlayerProfileWithStats[];
       const totalNumberOfGames = await prisma.game.count();
 
-      const percentual = 0.45;
+      const percentual = 0.35;
       const fortyPerCentGames = Math.ceil(totalNumberOfGames * percentual);
 
       const playerStats = allPlayersConverted

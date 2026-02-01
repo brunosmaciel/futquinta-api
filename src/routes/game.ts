@@ -10,6 +10,7 @@ import { uploadGamePictureController } from '../useCases/upload-game-picture';
 import { parser } from '../services/upload';
 import { incrementGoalsController } from '../useCases/increment-game-goals';
 import { decrementGoalsController } from '../useCases/decrement-game-goals';
+import { PlayersStats } from '../services/prismaClient';
 
 const gameRouter = Router();
 //*List
@@ -73,5 +74,25 @@ gameRouter.put('/goals/increment/:id', (req, res) => {
 });
 gameRouter.put('/goals/decrement/:id', (req, res) => {
   return decrementGoalsController.handle(req, res);
+});
+gameRouter.post('/:id/cards/yellow', async (req, res) => {
+  const { playerId } = req.body;
+
+  const updatedPlayerStats = await PlayersStats.update({
+    where: {
+      id: playerId,
+    },
+    data: {
+      yellowCards: 1,
+    },
+  });
+
+  res.json({
+    amarelo: updatedPlayerStats.yellowCards,
+  });
+});
+
+gameRouter.post('/:id/cards/yellow', (req, res) => {
+  res.json('Adicionar cartao vermelho');
 });
 export default gameRouter;

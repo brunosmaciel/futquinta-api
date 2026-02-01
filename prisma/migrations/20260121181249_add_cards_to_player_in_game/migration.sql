@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "stats" ADD COLUMN     "redCards" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "yellowCards" INTEGER NOT NULL DEFAULT 0;
